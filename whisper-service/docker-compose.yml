@@ -1,0 +1,41 @@
+# Whisper Speech-to-Text Service
+# Add this to your infrastructure docker-compose.yml
+# Or run standalone: docker compose -f docker-compose.yml up -d
+#
+# API: http://127.0.0.1:9000
+# Health: http://127.0.0.1:9000/health
+# Transcribe: curl -X POST http://127.0.0.1:9000/transcribe -F "file=@audio.wav"
+
+services:
+  whisper:
+    build:
+      context: .
+      args:
+        WHISPER_MODEL: base   # tiny|base|small|medium|large
+    container_name: whisper
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:9000:9000"
+    environment:
+      - WHISPER_MODEL=base
+      - WHISPER_LANGUAGE=en    # en, he, auto
+      - WHISPER_MAX_FILE_SIZE_MB=25
+    deploy:
+      resources:
+        limits:
+          memory: 2G           # base model needs ~1GB, small ~2GB, medium ~5GB
+          cpus: '4.0'          # Whisper is CPU-intensive during transcription
+        reservations:
+          memory: 512M
+          cpus: '1.0'
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:9000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    external: true

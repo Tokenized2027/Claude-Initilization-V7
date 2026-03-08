@@ -1,0 +1,293 @@
+{
+  "project_name": "TaskFlow",
+  "description": "Team collaboration and task management platform with real-time updates",
+  "repository": "https://github.com/user/taskflow",
+  "version": "0.3.0",
+  "last_updated": "2026-02-12",
+  "current_phase": "alpha",
+  "team_size": 1,
+
+  "tech_stack": {
+    "frontend": {
+      "framework": "Next.js 15 (App Router)",
+      "ui_library": "shadcn/ui + Tailwind CSS",
+      "state_management": "React Server Components + Server Actions",
+      "testing": "Vitest + Playwright"
+    },
+    "backend": {
+      "runtime": "Node.js 20",
+      "framework": "Next.js API Routes + Server Actions",
+      "database": "PostgreSQL 15",
+      "orm": "Prisma 5.x",
+      "auth": "JWT with httpOnly cookies"
+    },
+    "infrastructure": {
+      "hosting_frontend": "Vercel",
+      "hosting_backend": "Railway (PostgreSQL)",
+      "ci_cd": "GitHub Actions",
+      "monitoring": "Vercel Analytics + Sentry"
+    }
+  },
+
+  "sprint_info": {
+    "current_sprint": "Sprint 3",
+    "sprint_number": 3,
+    "sprint_start": "2026-02-10",
+    "sprint_end": "2026-02-21",
+    "velocity": 20,
+    "velocity_history": [18, 22, 20],
+    "points_committed": 20,
+    "points_completed": 12,
+    "points_remaining": 8,
+    "stories_in_sprint": [
+      {
+        "title": "Real-time task updates with WebSockets",
+        "points": 8,
+        "status": "in_progress"
+      },
+      {
+        "title": "Task commenting and mentions",
+        "points": 5,
+        "status": "completed"
+      },
+      {
+        "title": "User profile customization",
+        "points": 3,
+        "status": "completed"
+      },
+      {
+        "title": "Email notifications for task assignments",
+        "points": 5,
+        "status": "pending"
+      }
+    ]
+  },
+
+  "current_work": {
+    "active_story": "Real-time task updates with WebSockets",
+    "active_task": "Implement WebSocket server and client connection",
+    "active_bead": "WebSocket server setup (Socket.io integration)",
+    "last_commit": "feat: Add Socket.io server configuration",
+    "last_commit_hash": "a7f3d2e",
+    "working_branch": "feature/realtime-updates",
+    "blockers": [
+      "Socket.io CORS configuration for Vercel deployment (researching)"
+    ],
+    "next_steps": [
+      "Complete WebSocket server setup bead",
+      "Test WebSocket connection in development",
+      "Create client-side hook for WebSocket",
+      "Implement task update events"
+    ]
+  },
+
+  "architecture": {
+    "folder_structure": {
+      "app/": "Next.js App Router (routes, layouts, pages)",
+      "components/": "React components (ui/, features/, shared/)",
+      "lib/": "Utilities, API clients, database client",
+      "prisma/": "Database schema, migrations, seed",
+      "tests/": "E2E tests (Playwright)",
+      "public/": "Static assets"
+    },
+    "key_files": {
+      "app/layout.tsx": "Root layout with providers",
+      "lib/prisma.ts": "Prisma client singleton",
+      "lib/auth.ts": "JWT utilities and middleware",
+      "components/ui/": "shadcn/ui components",
+      "prisma/schema.prisma": "Database schema"
+    }
+  },
+
+  "environment_setup": {
+    "node_version": "20.x",
+    "package_manager": "npm",
+    "env_vars_required": [
+      "DATABASE_URL",
+      "JWT_SECRET",
+      "JWT_REFRESH_SECRET",
+      "NEXT_PUBLIC_APP_URL"
+    ],
+    "env_vars_optional": [
+      "SENTRY_DSN",
+      "SMTP_HOST",
+      "SMTP_PORT",
+      "SMTP_USER",
+      "SMTP_PASSWORD"
+    ]
+  },
+
+  "database": {
+    "provider": "PostgreSQL",
+    "version": "15",
+    "hosted_on": "Railway",
+    "current_migration": "20260210_add_task_comments",
+    "tables": [
+      "User",
+      "Team",
+      "Project",
+      "Task",
+      "Comment",
+      "Notification",
+      "Session"
+    ],
+    "indexes": [
+      "Task.projectId",
+      "Task.assigneeId",
+      "Comment.taskId",
+      "Comment.userId",
+      "Notification.userId"
+    ]
+  },
+
+  "api_design": {
+    "authentication": "JWT in httpOnly cookies",
+    "error_format": {
+      "error": "Human-readable message",
+      "code": "ERROR_CODE",
+      "status": 400
+    },
+    "rate_limiting": {
+      "enabled": true,
+      "limit": "100 requests/min per IP"
+    }
+  },
+
+  "testing_strategy": {
+    "unit_coverage_target": "80%",
+    "current_coverage": "76%",
+    "critical_paths_coverage": "100%",
+    "e2e_tests_count": 12,
+    "test_command": "npm test",
+    "e2e_command": "npx playwright test"
+  },
+
+  "deployment": {
+    "staging_url": "https://taskflow-staging.vercel.app",
+    "production_url": "https://taskflow.app",
+    "staging_deploy_trigger": "push to main",
+    "production_deploy_trigger": "manual promotion",
+    "deployment_checks": [
+      "Lint",
+      "Type check",
+      "Unit tests",
+      "E2E tests",
+      "Build"
+    ]
+  },
+
+  "known_issues": [
+    {
+      "issue": "WebSocket connection drops on Vercel serverless functions",
+      "severity": "high",
+      "workaround": "Researching Socket.io + Vercel compatibility",
+      "tracking": "GitHub Issue #42"
+    },
+    {
+      "issue": "Profile image uploads slow on large files",
+      "severity": "medium",
+      "workaround": "Client-side image compression before upload",
+      "tracking": "Backlog"
+    }
+  ],
+
+  "recent_decisions": [
+    {
+      "date": "2026-02-08",
+      "decision": "Adopt bead method for all features",
+      "impact": "8-12 commits/day, always working code"
+    },
+    {
+      "date": "2026-02-05",
+      "decision": "Use JWT with httpOnly cookies",
+      "impact": "Auth middleware on every request"
+    },
+    {
+      "date": "2026-02-03",
+      "decision": "Use Vitest instead of Jest",
+      "impact": "Faster test runs, native ESM support"
+    }
+  ],
+
+  "documentation": {
+    "README.md": "Project overview and setup instructions",
+    "CLAUDE.md": "Rules for Claude Code",
+    "STATUS.md": "Current project status (updated weekly)",
+    "PRD.md": "Product requirements",
+    "TECH_SPEC.md": "Technical specification",
+    "docs/SPRINT_03.md": "Current sprint plan",
+    "docs/BACKLOG.md": "Product backlog",
+    "docs/RETROSPECTIVE_02.md": "Last retrospective"
+  },
+
+  "dependencies_key": {
+    "next": "15.0.0",
+    "react": "19.0.0",
+    "prisma": "5.8.0",
+    "@prisma/client": "5.8.0",
+    "zod": "3.22.4",
+    "bcrypt": "5.1.1",
+    "jsonwebtoken": "9.0.2",
+    "socket.io": "4.6.1",
+    "socket.io-client": "4.6.1"
+  },
+
+  "metrics": {
+    "total_commits": 287,
+    "total_prs": 34,
+    "open_issues": 8,
+    "closed_issues": 42,
+    "lines_of_code": "~12,500",
+    "test_files": 87,
+    "active_days_last_30": 24,
+    "avg_commits_per_day": 9.5
+  },
+
+  "upcoming_milestones": [
+    {
+      "milestone": "v0.4.0 - Real-time features complete",
+      "target_date": "2026-02-21",
+      "status": "on_track",
+      "features": [
+        "WebSocket integration",
+        "Real-time task updates",
+        "Live notifications"
+      ]
+    },
+    {
+      "milestone": "v0.5.0 - Email notifications",
+      "target_date": "2026-03-07",
+      "status": "planned",
+      "features": [
+        "Email on task assignment",
+        "Email on mentions",
+        "Daily digest"
+      ]
+    },
+    {
+      "milestone": "v1.0.0 - Public beta",
+      "target_date": "2026-04-15",
+      "status": "planned",
+      "features": [
+        "All core features complete",
+        "Performance optimized",
+        "Security audit complete"
+      ]
+    }
+  ],
+
+  "links": {
+    "github_repo": "https://github.com/user/taskflow",
+    "staging": "https://taskflow-staging.vercel.app",
+    "production": "https://taskflow.app",
+    "figma_designs": "https://figma.com/file/...",
+    "project_board": "https://github.com/user/taskflow/projects/1"
+  },
+
+  "notes": [
+    "Memory system adopted on 2026-01-15, saving ~10 min/session",
+    "Sprint management working well, velocity stabilizing around 20 points",
+    "Bead method significantly reduces stress, always have working code",
+    "WebSocket integration is current challenge, researching Vercel compatibility"
+  ]
+}

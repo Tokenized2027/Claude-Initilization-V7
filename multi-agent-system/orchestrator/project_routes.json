@@ -1,0 +1,421 @@
+{
+  "_comment": "Task routing config. Keywords support weights. cost_estimate is USD per agent run (used for budget math).",
+  "_usage": "Each task type has: agent, context_type, keywords (weighted), priority (tiebreaker). Replace the example routes below with your own projects.",
+  "routes": {
+    "project-social": {
+      "agent": "content-creator",
+      "context_type": "project-social",
+      "keywords": [
+        {
+          "keyword": "tweet",
+          "weight": 3
+        },
+        {
+          "keyword": "twitter",
+          "weight": 3
+        },
+        {
+          "keyword": "social",
+          "weight": 2
+        },
+        "post",
+        "thread",
+        {
+          "keyword": "announcement",
+          "weight": 2
+        }
+      ],
+      "priority": 10,
+      "cost_estimate": 0.75
+    },
+    "project-support": {
+      "agent": "support-specialist",
+      "context_type": "project-support",
+      "keywords": [
+        {
+          "keyword": "support",
+          "weight": 3
+        },
+        "help",
+        "user question",
+        {
+          "keyword": "troubleshoot",
+          "weight": 2
+        }
+      ],
+      "priority": 10,
+      "cost_estimate": 1.25
+    },
+    "project-governance": {
+      "agent": "governance-specialist",
+      "context_type": "project-governance",
+      "keywords": [
+        {
+          "keyword": "proposal",
+          "weight": 3
+        },
+        {
+          "keyword": "governance",
+          "weight": 3
+        },
+        {
+          "keyword": "vote",
+          "weight": 2
+        },
+        {
+          "keyword": "dao",
+          "weight": 2
+        }
+      ],
+      "priority": 10,
+      "cost_estimate": 2.5
+    },
+    "project-partnership": {
+      "agent": "bd-specialist",
+      "context_type": "project-partnership",
+      "keywords": [
+        {
+          "keyword": "partnership",
+          "weight": 3
+        },
+        {
+          "keyword": "integration",
+          "weight": 2
+        },
+        {
+          "keyword": "business development",
+          "weight": 3
+        },
+        {
+          "keyword": "bd",
+          "weight": 2
+        },
+        {
+          "keyword": "outreach",
+          "weight": 2
+        }
+      ],
+      "priority": 10,
+      "cost_estimate": 2.5
+    },
+    "project-content": {
+      "agent": "content-creator",
+      "context_type": "project-content",
+      "keywords": [
+        {
+          "keyword": "blog",
+          "weight": 3
+        },
+        {
+          "keyword": "article",
+          "weight": 3
+        },
+        "documentation",
+        "guide",
+        {
+          "keyword": "explainer",
+          "weight": 2
+        }
+      ],
+      "priority": 8,
+      "cost_estimate": 3.0
+    },
+    "project-analytics": {
+      "agent": "frontend-developer",
+      "context_type": "project-analytics",
+      "keywords": [
+        {
+          "keyword": "analytics",
+          "weight": 3
+        },
+        {
+          "keyword": "metrics",
+          "weight": 2
+        },
+        {
+          "keyword": "kpi",
+          "weight": 3
+        },
+        "monitor",
+        "report",
+        "stats"
+      ],
+      "priority": 9,
+      "cost_estimate": 5.0
+    },
+    "project-lookup": {
+      "agent": "generalist",
+      "context_type": "project-lookup",
+      "keywords": [
+        "lookup",
+        "reference",
+        "glossary",
+        "term"
+      ],
+      "priority": 5,
+      "cost_estimate": 0.5
+    },
+    "coding-dashboard": {
+      "agent": "frontend-developer",
+      "context_type": "coding-dashboard",
+      "keywords": [
+        {
+          "keyword": "dashboard",
+          "weight": 3
+        },
+        {
+          "keyword": "chart",
+          "weight": 2
+        },
+        {
+          "keyword": "visualization",
+          "weight": 2
+        },
+        "ui",
+        "component",
+        "page"
+      ],
+      "priority": 7,
+      "cost_estimate": 7.5
+    },
+    "coding-api": {
+      "agent": "backend-developer",
+      "context_type": "coding-api",
+      "keywords": [
+        {
+          "keyword": "api",
+          "weight": 2
+        },
+        {
+          "keyword": "endpoint",
+          "weight": 3
+        },
+        {
+          "keyword": "backend",
+          "weight": 3
+        },
+        {
+          "keyword": "server",
+          "weight": 2
+        },
+        "route",
+        "database"
+      ],
+      "priority": 7,
+      "cost_estimate": 5.5
+    },
+    "coding-devops": {
+      "agent": "devops-engineer",
+      "context_type": "coding-devops",
+      "keywords": [
+        {
+          "keyword": "docker",
+          "weight": 3
+        },
+        {
+          "keyword": "deploy",
+          "weight": 3
+        },
+        {
+          "keyword": "vercel",
+          "weight": 3
+        },
+        {
+          "keyword": "ci",
+          "weight": 2
+        },
+        {
+          "keyword": "pipeline",
+          "weight": 3
+        },
+        {
+          "keyword": "container",
+          "weight": 3
+        }
+      ],
+      "priority": 8,
+      "cost_estimate": 4.5
+    },
+    "coding-debug": {
+      "agent": "frontend-developer",
+      "context_type": "coding-debug",
+      "keywords": [
+        "bug",
+        "fix",
+        "error",
+        "crash",
+        "broken",
+        "not working",
+        {
+          "keyword": "debug",
+          "weight": 2
+        }
+      ],
+      "priority": 8,
+      "cost_estimate": 3.0
+    },
+    "coding-test": {
+      "agent": "system-tester",
+      "context_type": "coding-test",
+      "keywords": [
+        {
+          "keyword": "test",
+          "weight": 2
+        },
+        {
+          "keyword": "spec",
+          "weight": 2
+        },
+        {
+          "keyword": "jest",
+          "weight": 3
+        },
+        {
+          "keyword": "playwright",
+          "weight": 3
+        },
+        {
+          "keyword": "e2e",
+          "weight": 3
+        }
+      ],
+      "priority": 8,
+      "cost_estimate": 4.0
+    },
+    "coding-security": {
+      "agent": "security-auditor",
+      "context_type": "coding-security",
+      "keywords": [
+        {
+          "keyword": "security",
+          "weight": 3
+        },
+        {
+          "keyword": "audit",
+          "weight": 3
+        },
+        {
+          "keyword": "vulnerability",
+          "weight": 3
+        },
+        {
+          "keyword": "injection",
+          "weight": 2
+        }
+      ],
+      "priority": 9,
+      "cost_estimate": 4.5
+    },
+    "coding-prototype": {
+      "agent": "frontend-developer",
+      "context_type": "coding-prototype",
+      "keywords": [
+        "prototype",
+        "poc",
+        "proof of concept",
+        "experiment",
+        "quick",
+        "try"
+      ],
+      "priority": 3,
+      "cost_estimate": 3.5
+    },
+    "planning-architecture": {
+      "agent": "system-architect",
+      "context_type": "planning-architecture",
+      "keywords": [
+        {
+          "keyword": "architecture",
+          "weight": 3
+        },
+        "plan",
+        "structure",
+        "system",
+        "tech stack"
+      ],
+      "priority": 6,
+      "cost_estimate": 3.0
+    },
+    "planning-design": {
+      "agent": "designer",
+      "context_type": "planning-design",
+      "keywords": [
+        {
+          "keyword": "wireframe",
+          "weight": 3
+        },
+        {
+          "keyword": "mockup",
+          "weight": 3
+        },
+        "layout",
+        "design system",
+        "color palette",
+        {
+          "keyword": "ui design",
+          "weight": 3
+        },
+        {
+          "keyword": "ux",
+          "weight": 2
+        },
+        "spacing",
+        "typography",
+        "component spec"
+      ],
+      "priority": 7,
+      "cost_estimate": 2.5
+    },
+    "planning-api": {
+      "agent": "api-architect",
+      "context_type": "planning-api",
+      "keywords": [
+        {
+          "keyword": "api design",
+          "weight": 3
+        },
+        {
+          "keyword": "api schema",
+          "weight": 3
+        },
+        {
+          "keyword": "endpoint design",
+          "weight": 3
+        },
+        {
+          "keyword": "openapi",
+          "weight": 3
+        },
+        {
+          "keyword": "swagger",
+          "weight": 3
+        },
+        "data model",
+        "api contract",
+        "rest design"
+      ],
+      "priority": 7,
+      "cost_estimate": 3.0
+    },
+    "planning-prd": {
+      "agent": "product-manager",
+      "context_type": "planning-prd",
+      "keywords": [
+        {
+          "keyword": "prd",
+          "weight": 3
+        },
+        {
+          "keyword": "requirements",
+          "weight": 2
+        },
+        "feature",
+        "scope",
+        "roadmap"
+      ],
+      "priority": 6,
+      "cost_estimate": 3.0
+    }
+  },
+  "default_task_type": "coding-prototype"
+}

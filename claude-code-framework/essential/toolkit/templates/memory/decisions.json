@@ -1,0 +1,28 @@
+{
+  "decisions": [
+    {
+      "id": "dec-001",
+      "date": "2026-02-12",
+      "category": "architecture",
+      "decision": "Example: Use PostgreSQL instead of MongoDB",
+      "rationale": "Example: Need complex queries and relationships. Team familiar with SQL.",
+      "alternatives_considered": ["MongoDB", "MySQL", "SQLite"],
+      "impact": "All data models must be normalized",
+      "status": "active",
+      "related_files": ["example/path/to/schema.prisma"],
+      "project": "example-project"
+    }
+  ],
+  "_template": {
+    "id": "dec-XXX (auto-increment)",
+    "date": "YYYY-MM-DD",
+    "category": "architecture | tech | design | process",
+    "decision": "Brief description of what was decided",
+    "rationale": "Why this decision was made",
+    "alternatives_considered": ["Option 1", "Option 2"],
+    "impact": "How this affects the project",
+    "status": "active | deprecated | superseded",
+    "related_files": ["path/to/file"],
+    "project": "project-name (for cross-project memory)"
+  }
+}

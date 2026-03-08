@@ -1,0 +1,22 @@
+[Unit]
+Description=Mini PC Telegram Command Bot
+After=network.target claude-orchestrator.service
+Wants=claude-orchestrator.service
+
+[Service]
+Type=simple
+User=user
+WorkingDirectory=/home/user/claude-multi-agent/telegram-bot
+ExecStart=/home/user/claude-multi-agent/telegram-bot/venv/bin/python3 bot.py
+Restart=always
+RestartSec=10
+EnvironmentFile=/home/user/claude-multi-agent/telegram-bot/.env
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/home/user/logs /home/user/claude-memory /home/user/projects
+ProtectHome=read-only
+
+[Install]
+WantedBy=multi-user.target

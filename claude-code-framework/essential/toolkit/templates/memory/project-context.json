@@ -1,0 +1,129 @@
+{
+  "last_updated": "2026-02-12T14:30:00Z",
+  "project_name": "example-project",
+  "current_phase": "Phase 2 — API Development",
+  "active_branch": "develop",
+  "sprint": {
+    "number": 7,
+    "goal": "User can authenticate and manage profile",
+    "status": "in_progress",
+    "days_remaining": 5
+  },
+  "features_in_progress": [
+    {
+      "name": "User Authentication",
+      "status": "80% complete",
+      "remaining": [
+        "Email verification",
+        "Password reset flow"
+      ],
+      "files_changed": [
+        "src/api/auth.ts",
+        "src/components/LoginForm.tsx",
+        "prisma/schema.prisma"
+      ],
+      "last_session": "2026-02-11",
+      "assigned_to": "backend-developer",
+      "blockers": []
+    }
+  ],
+  "known_bugs": [
+    {
+      "id": "BUG-001",
+      "description": "Login returns 500 on duplicate email",
+      "severity": "medium",
+      "status": "investigating",
+      "found": "2026-02-10",
+      "related_files": [
+        "src/api/auth.ts"
+      ]
+    }
+  ],
+  "recent_changes": [
+    {
+      "date": "2026-02-11",
+      "summary": "Added JWT authentication",
+      "commits": ["abc123", "def456"],
+      "files": 5,
+      "impact": "Auth system now functional"
+    },
+    {
+      "date": "2026-02-10",
+      "summary": "Set up Prisma with PostgreSQL",
+      "commits": ["ghi789"],
+      "files": 3,
+      "impact": "Database ready for use"
+    }
+  ],
+  "next_steps": [
+    {
+      "priority": 1,
+      "task": "Connect frontend login form to backend API",
+      "estimate": "2 hours",
+      "depends_on": []
+    },
+    {
+      "priority": 2,
+      "task": "Add error handling for auth endpoints",
+      "estimate": "1 hour",
+      "depends_on": []
+    },
+    {
+      "priority": 3,
+      "task": "Write integration tests for auth flow",
+      "estimate": "2 hours",
+      "depends_on": ["task 1", "task 2"]
+    }
+  ],
+  "dependencies": {
+    "added_recently": [
+      {
+        "name": "bcrypt",
+        "version": "5.1.1",
+        "purpose": "Password hashing",
+        "added_date": "2026-02-09"
+      },
+      {
+        "name": "jsonwebtoken",
+        "version": "9.0.2",
+        "purpose": "JWT token generation",
+        "added_date": "2026-02-09"
+      },
+      {
+        "name": "@prisma/client",
+        "version": "5.8.0",
+        "purpose": "Database ORM",
+        "added_date": "2026-02-08"
+      }
+    ]
+  },
+  "tech_stack": {
+    "frontend": "Next.js 15",
+    "backend": "Next.js API Routes",
+    "database": "PostgreSQL + Prisma",
+    "auth": "JWT + httpOnly cookies",
+    "styling": "Tailwind CSS",
+    "testing": "Vitest + Playwright"
+  },
+  "environment_status": {
+    "development": {
+      "database": "working",
+      "api": "working",
+      "frontend": "working"
+    },
+    "staging": {
+      "deployed": false,
+      "url": null
+    },
+    "production": {
+      "deployed": false,
+      "url": null
+    }
+  },
+  "statistics": {
+    "total_commits": 42,
+    "total_files": 87,
+    "total_lines": 3421,
+    "test_coverage": 65
+  }
+}

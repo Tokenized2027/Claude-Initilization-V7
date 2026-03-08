@@ -1,0 +1,116 @@
+{
+  "decisions": [
+    {
+      "id": "dec-001",
+      "date": "2026-01-15",
+      "category": "architecture",
+      "decision": "Use PostgreSQL with Prisma ORM instead of MongoDB",
+      "rationale": "Need ACID compliance for financial transactions, complex relational queries, and strong type safety with Prisma",
+      "alternatives_considered": [
+        "MongoDB (rejected: no ACID for transactions)",
+        "MySQL (rejected: inferior JSON support)",
+        "Supabase (considered for future if need hosted)"
+      ],
+      "impact": "All data models must use relational schema. Migration files required for schema changes. Requires PostgreSQL in production.",
+      "status": "active"
+    },
+    {
+      "id": "dec-002",
+      "date": "2026-01-18",
+      "category": "tech",
+      "decision": "Use Next.js 15 App Router instead of Pages Router",
+      "rationale": "Better RSC support, improved performance, server actions for mutations, cleaner data fetching patterns",
+      "alternatives_considered": [
+        "Pages Router (rejected: legacy approach)",
+        "Remix (rejected: team familiarity with Next)",
+        "Vite + React Router (rejected: need SSR)"
+      ],
+      "impact": "All routes use app/ directory structure. Server components by default. Client components marked with 'use client'.",
+      "status": "active"
+    },
+    {
+      "id": "dec-003",
+      "date": "2026-01-22",
+      "category": "design",
+      "decision": "Use Tailwind CSS with shadcn/ui component library",
+      "rationale": "Utility-first CSS for consistency, shadcn provides accessible components we own (not dependency), TypeScript-first",
+      "alternatives_considered": [
+        "Material UI (rejected: bundle size)",
+        "Chakra UI (rejected: less customizable)",
+        "Plain CSS Modules (rejected: slower development)"
+      ],
+      "impact": "All styling uses Tailwind utilities. Components copied from shadcn, customized in components/ui/. No CSS-in-JS.",
+      "status": "active"
+    },
+    {
+      "id": "dec-004",
+      "date": "2026-01-28",
+      "category": "process",
+      "decision": "Adopt 2-week sprint cycles with locked scope",
+      "rationale": "Need predictable delivery for stakeholder demos. 2 weeks balances flexibility and planning overhead.",
+      "alternatives_considered": [
+        "1-week sprints (rejected: too much planning overhead)",
+        "Kanban flow (rejected: need predictability for demos)",
+        "Monthly milestones (rejected: feedback loop too slow)"
+      ],
+      "impact": "Sprint planning every 2 weeks. Scope locked on Day 0. Daily updates required. Retrospectives mandatory.",
+      "status": "active"
+    },
+    {
+      "id": "dec-005",
+      "date": "2026-02-03",
+      "category": "tech",
+      "decision": "Use Vitest instead of Jest for testing",
+      "rationale": "Native ESM support, faster, better Vite integration, compatible with existing Jest tests via compatibility layer",
+      "alternatives_considered": [
+        "Jest (rejected: slow with ESM)",
+        "Playwright only (rejected: need unit tests too)",
+        "No testing (rejected: quality requirement)"
+      ],
+      "impact": "All tests use Vitest. vitest.config.ts for configuration. npm test runs Vitest. Playwright for E2E.",
+      "status": "active"
+    },
+    {
+      "id": "dec-006",
+      "date": "2026-02-05",
+      "category": "architecture",
+      "decision": "Use JWT with httpOnly cookies for authentication",
+      "rationale": "Balance security (XSS protection via httpOnly) and simplicity (stateless auth). Refresh token rotation for security.",
+      "alternatives_considered": [
+        "Session-based auth (rejected: harder to scale)",
+        "JWT in localStorage (rejected: XSS vulnerability)",
+        "OAuth only (rejected: need email/password option)"
+      ],
+      "impact": "Tokens stored in httpOnly cookies. Middleware validates on every request. Refresh endpoint at /api/auth/refresh.",
+      "status": "active"
+    },
+    {
+      "id": "dec-007",
+      "date": "2026-02-08",
+      "category": "process",
+      "decision": "Adopt bead method for all feature development",
+      "rationale": "Reduces stress, ensures working code always, enables easy pivots, improves commit history for debugging",
+      "alternatives_considered": [
+        "Feature branches (rejected: leads to big bang merges)",
+        "TDD only (rejected: too rigid for exploration)",
+        "No structure (rejected: leads to broken intermediate states)"
+      ],
+      "impact": "All features decomposed into 15-45 min beads. Commit after each bead. BEAD_CHAIN.md for planning. 8-12 commits/day expected.",
+      "status": "active"
+    },
+    {
+      "id": "dec-008",
+      "date": "2026-02-10",
+      "category": "tech",
+      "decision": "Deploy to Vercel for frontend, Railway for backend services",
+      "rationale": "Vercel optimized for Next.js. Railway simple for PostgreSQL and background workers. Both have good free tiers.",
+      "alternatives_considered": [
+        "All on Vercel (rejected: database limitations)",
+        "All on Railway (rejected: Vercel better for Next.js)",
+        "Self-hosted (rejected: maintenance overhead)"
+      ],
+      "impact": "CI/CD via GitHub Actions. Vercel auto-deploys from main. Railway deploys backend services. Staging + production environments.",
+      "status": "active"
+    }
+  ]
+}
