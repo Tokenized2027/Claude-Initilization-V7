@@ -1,16 +1,17 @@
 # Personal Context for Claude
 
-> Claude reads this file at the start of every session (when working from your home directory).
-> It persists across conversations — this is how Claude "remembers" you.
+> Claude reads this file at the start of every session. It persists across conversations.
+> **Hard limit: 200 lines.** Lines beyond 200 are truncated and never seen by Claude.
+> Keep this as a concise index — move details into topic files and link to them.
 >
-> Location: ~/.claude/projects/<your-project>/memory/MEMORY.md
+> Location: `~/.claude/projects/<your-project>/memory/MEMORY.md`
 
 ## About Me
 
 - **Name:** [Your name]
 - **Role:** [e.g., "Vibe coder — I direct AI to build, I don't write code manually"]
-- **Location/Timezone:** [e.g., "US East / EST"]
-- **What I'm building:** [1-2 sentences about your main project]
+- **Location/Timezone:** [e.g., "US East / America/New_York"]
+- **What I'm building:** [1-2 sentences about your main focus]
 
 ## How I Work
 
@@ -18,13 +19,14 @@
 - [e.g., "I prefer simple solutions over clever ones"]
 - [e.g., "Always commit with conventional commit messages"]
 - [e.g., "Push back if I'm overcomplicating something"]
+- [e.g., "Questions are questions — don't take action on a '?' message"]
 
 ## My Projects
 
 | Project | Path | Status |
 |---------|------|--------|
 | [Main project] | ~/projects/[name] | Active |
-| [Side project] | ~/projects/[name] | Active |
+| [Side project] | ~/projects/[name] | Paused |
 
 ## Tech Preferences
 
@@ -33,17 +35,29 @@
 - [e.g., "PostgreSQL, not MongoDB"]
 - [e.g., "Vercel for deployment"]
 
-## Things Claude Should Remember
+## Infrastructure
 
-> Add things here as you work. Examples:
+- **Dev machine:** [e.g., "MacBook Pro M2" or "Linux server via SSH"]
+- **Production:** [e.g., "Vercel" or "AWS EC2" or "Not deployed yet"]
+- **Database:** [e.g., "PostgreSQL on Railway"]
+
+## Key People
+
+> If you collaborate with others, note context:
 >
-> - "The API key for [service] is in .env as SERVICE_API_KEY"
-> - "Don't use library X — it caused issues on [date]"
-> - "The deploy script is at scripts/deploy.sh"
-> - "Always run typecheck before committing"
+> - **[Name]** — [role], [how to reach them]
 
-## People
+## Feedback & Rules
 
-> If you collaborate with others, note relevant context:
+> When Claude makes a mistake or you correct its behavior, save the rule here.
+> These prevent the same mistake from happening again across sessions.
+> For detailed pattern tracking, see `memory/patterns.md`.
 >
-> - **[Name]** — [role]. [Any relevant notes]
+> - [e.g., "Never use `any` type — always find or create the correct type"]
+> - [e.g., "Always run typecheck before committing"]
+> - [e.g., "Don't add features beyond what I asked for"]
+
+## Transient Context
+
+> See `memory/pending.md` for time-sensitive items (blockers, in-progress work).
+> See `memory/patterns.md` for universal rules from past mistakes.

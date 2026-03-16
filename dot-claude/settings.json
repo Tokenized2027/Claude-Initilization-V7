@@ -17,5 +17,39 @@
       "Grep"
     ],
     "deny": []
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"startup hook success: $(echo \"📍 $(pwd) | branch: $(git branch --show-current 2>/dev/null || echo 'not a git repo')\")\"",
+            "statusMessage": "Checking workspace..."
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/hooks/session-recall.py",
+            "statusMessage": "Loading recent session context..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"CWD: $(pwd) | Branch: $(git branch --show-current 2>/dev/null || echo 'n/a')\"",
+            "statusMessage": "Tracking workspace..."
+          }
+        ]
+      }
+    ]
   }
 }

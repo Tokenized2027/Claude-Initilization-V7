@@ -1,6 +1,6 @@
 # START HERE - Your Claude Resources Hub
 
-**Version:** V4.1 — Mac Ready
+**Version:** V7.1 — Hooks + Memory System
 **Your Setup:** Non-developer vibe coder | macOS
 
 ---
@@ -14,18 +14,22 @@ chmod +x setup-mac.sh
 ```
 This installs Homebrew, Node.js, Git, and Claude Code CLI.
 
-### 2. Copy settings to Claude's config
+### 2. Copy settings + install hooks
 ```bash
 mkdir -p ~/.claude
 cp dot-claude/settings.json ~/.claude/settings.json
+
+# Install hooks (gives Claude memory across sessions)
+chmod +x hooks/install-hooks.sh
+./hooks/install-hooks.sh
 ```
 
 ### 3. Set up persistent memory
 ```bash
-# Claude auto-creates this path when you first run it, but you can seed it:
 mkdir -p ~/.claude/projects/-home-$(whoami)/memory
 cp memory/MEMORY.md ~/.claude/projects/-home-$(whoami)/memory/MEMORY.md
-# Then edit it with your info
+# Edit MEMORY.md with your info — this is how Claude remembers you
+# See memory/guidelines.md for what to save and what to skip
 ```
 
 ### 4. Add a CLAUDE.md to your first project

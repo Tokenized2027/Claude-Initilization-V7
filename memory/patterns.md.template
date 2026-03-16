@@ -1,0 +1,29 @@
+# Patterns & Mistakes
+
+> Record rules learned from mistakes here. These prevent the same error across sessions.
+>
+> Format: Rule title → When it applies → What went wrong → The rule going forward.
+> When a pattern saves you from a mistake, annotate it: `(last hit: YYYY-MM-DD)`.
+> Prune entries not triggered in 60 days — they're either internalized or irrelevant.
+
+## Rule: [Example] Never commit without running typecheck
+
+**When:** Before any `git commit`
+
+**Mistake:** Pushed code with TypeScript errors that broke CI (2024-01-15)
+
+**Rule:** Always run `npm run typecheck` before committing. If it fails, fix before commit.
+
+---
+
+## Rule: [Example] Check existing code before creating new files
+
+**When:** Adding new functionality
+
+**Mistake:** Created a new utility function that already existed in `lib/utils.ts`
+
+**Rule:** Search the codebase first (`grep` or `glob`) before creating new files or functions.
+
+---
+
+<!-- Add your own patterns below. Delete the examples above once you have real ones. -->
