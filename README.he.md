@@ -41,7 +41,7 @@
 
 ```bash
 # 1. שכפול
-git clone https://github.com/Tokenized2027/Claude-Initilization-V7.git ~/Desktop/Claude
+git clone https://github.com/Tokenized2027/Claude-Initialization-V7.git ~/Desktop/Claude
 cd ~/Desktop/Claude
 
 # 2. הרצת סקריפט התקנה (מתקין Homebrew, Node.js, Git, Claude Code CLI)
@@ -69,7 +69,7 @@ cp memory/MEMORY.md ~/.claude/projects/-home-$(whoami)/memory/MEMORY.md
 # Claude Code CLI: npm install -g @anthropic-ai/claude-code
 
 # 2. שכפול
-git clone https://github.com/Tokenized2027/Claude-Initilization-V7.git %USERPROFILE%\Desktop\Claude
+git clone https://github.com/Tokenized2027/Claude-Initialization-V7.git %USERPROFILE%\Desktop\Claude
 cd %USERPROFILE%\Desktop\Claude
 
 # 3. העתקת הגדרות
@@ -90,7 +90,7 @@ sudo apt-get install -y nodejs git
 npm install -g @anthropic-ai/claude-code
 
 # 2. שכפול
-git clone https://github.com/Tokenized2027/Claude-Initilization-V7.git ~/Claude
+git clone https://github.com/Tokenized2027/Claude-Initialization-V7.git ~/Claude
 cd ~/Claude
 
 # 3. אותו דבר כמו שלבים 3-5 ב-Mac

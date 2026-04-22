@@ -35,11 +35,21 @@ You clone this repo, follow the setup, and walk away with a fully configured Cla
 
 ## Setup (10 Minutes)
 
+### One-line installer (Mac, Linux, WSL)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Tokenized2027/Claude-Initialization-V7/main/install.sh | bash
+```
+
+This clones the repo to `~/Claude`, copies `settings.json` into `~/.claude/`, installs the hooks, and seeds a starter `MEMORY.md`. Existing files are backed up, nothing is overwritten silently.
+
+Prefer the manual steps? Pick your platform below.
+
 ### Mac
 
 ```bash
 # 1. Clone
-git clone https://github.com/Tokenized2027/Claude-Initilization-V7.git ~/Desktop/Claude
+git clone https://github.com/Tokenized2027/Claude-Initialization-V7.git ~/Desktop/Claude
 cd ~/Desktop/Claude
 
 # 2. Run setup (installs Homebrew, Node.js, Git, Claude Code CLI)
@@ -67,16 +77,16 @@ cp memory/MEMORY.md ~/.claude/projects/-home-$(whoami)/memory/MEMORY.md
 # Claude Code CLI: npm install -g @anthropic-ai/claude-code
 
 # 2. Clone
-git clone https://github.com/Tokenized2027/Claude-Initilization-V7.git %USERPROFILE%\Desktop\Claude
+git clone https://github.com/Tokenized2027/Claude-Initialization-V7.git %USERPROFILE%\Desktop\Claude
 cd %USERPROFILE%\Desktop\Claude
 
 # 3. Copy settings
 mkdir %USERPROFILE%\.claude 2>nul
 copy dot-claude\settings.json %USERPROFILE%\.claude\settings.json
 
-# 4. Set up persistent memory
-mkdir %USERPROFILE%\.claude\projects 2>nul
-copy memory\MEMORY.md %USERPROFILE%\.claude\projects\memory\MEMORY.md
+# 4. Set up persistent memory (the slug folder matters: Claude Code looks for it here)
+mkdir %USERPROFILE%\.claude\projects\-home-%USERNAME%\memory 2>nul
+copy memory\MEMORY.md %USERPROFILE%\.claude\projects\-home-%USERNAME%\memory\MEMORY.md
 ```
 
 ### Linux
@@ -88,10 +98,20 @@ sudo apt-get install -y nodejs git
 npm install -g @anthropic-ai/claude-code
 
 # 2. Clone
-git clone https://github.com/Tokenized2027/Claude-Initilization-V7.git ~/Claude
+git clone https://github.com/Tokenized2027/Claude-Initialization-V7.git ~/Claude
 cd ~/Claude
 
-# 3. Same as Mac steps 3-5
+# 3. Export CLAUDE_HOME (Linux clone lives at ~/Claude, not ~/Desktop/Claude)
+echo 'export CLAUDE_HOME="$HOME/Claude"' >> ~/.bashrc && source ~/.bashrc
+
+# 4. Install hooks + settings
+mkdir -p ~/.claude
+cp dot-claude/settings.json ~/.claude/settings.json
+chmod +x hooks/install-hooks.sh && ./hooks/install-hooks.sh
+
+# 5. Set up persistent memory
+mkdir -p ~/.claude/projects/-home-$(whoami)/memory
+cp memory/MEMORY.md ~/.claude/projects/-home-$(whoami)/memory/MEMORY.md
 ```
 
 ### Start Your First Project
@@ -160,10 +180,13 @@ You (laptop/phone)
 | **Build my first project** | `claude-code-framework/essential/guides/FIRST_PROJECT.md` |
 | **Understand daily workflow** | `claude-code-framework/essential/guides/DAILY_WORKFLOW.md` |
 | **Set up hooks (session memory)** | `hooks/README.md` |
+| **Understand what each hook does to my machine** | `hooks/SAFETY.md` |
 | **Understand the memory system** | `memory/guidelines.md` |
 | **Learn Git as a non-coder** | `claude-code-framework/essential/guides/GIT_FOR_VIBE_CODERS.md` |
 | **Avoid common mistakes** | `claude-code-framework/essential/guides/PITFALLS.md` |
 | **Fix something that broke** | `claude-code-framework/essential/guides/TROUBLESHOOTING.md` |
+| **See filled-in CLAUDE.md examples** | `examples/README.md` |
+| **Share my own CLAUDE.md** | `CONTRIBUTING.md` |
 | **Save money on API costs** | `claude-code-framework/advanced/guides/PROMPT_CACHING.md` |
 | **Set up a 24/7 server** | `claude-code-framework/advanced/infrastructure/README.md` |
 | **Deploy the agent system** | `multi-agent-system/docs/DEPLOYMENT_GUIDE.md` |
@@ -192,6 +215,37 @@ You (laptop/phone)
 +-- project-contexts/               <- Per-project documentation templates
 +-- templates/                      <- Docker + boilerplate
 ```
+
+## Privacy and data flow
+
+You own your computer, so you deserve to know exactly what leaves it when you use this kit. Short version: Anthropic sees the code you send to Claude. Nothing else phones home unless you opt in.
+
+| Component | Runs where | Sends data to | Who sees what |
+|---|---|---|---|
+| **Claude Code CLI** | Your machine | Anthropic (`api.anthropic.com`) | Your prompts, your open files, your terminal output. Standard Claude TOS applies. |
+| **CLAUDE.md** | Your machine | Anthropic, via Claude | Same as above. It is just a file Claude reads. |
+| **Session recall hook** | Your machine | Nothing. Local only. | Reads `~/.claude/projects/*.jsonl` and injects summaries into Claude's context. Never posts anywhere. |
+| **Safety hooks** (block-dangerous, protect-files, pii-scan) | Your machine | Nothing. Local only. | Inspect your commands and staged diffs, print warnings. No network calls. |
+| **Audit logger** | Your machine | Nothing. Writes to `~/.claude/audit/*.jsonl`. | Local JSONL record of every tool call. Never sent anywhere. |
+| **Whisper service** *(optional)* | Your machine (Docker) | Depends on your config. If you use local `faster-whisper`, zero external calls. If you use OpenAI's Whisper API, audio goes to OpenAI. | Your voice recordings, if you choose OpenAI. |
+| **Telegram bot** *(optional)* | Your machine | Telegram (`api.telegram.org`) | Any message you send to the bot. Telegram sees it. |
+| **Google integrations** *(optional)* | Your machine | Google | Calendar and email content you query. Standard Google API terms. |
+| **Memory files** (`MEMORY.md`) | Your machine | Anthropic, as part of Claude's context | Whatever you wrote in them. Do not put secrets there. |
+
+### What is never sent anywhere
+
+- Your `.env` files.
+- Your `~/.ssh/` keys.
+- Files Claude has not been explicitly asked to read.
+- Files blocked by your `~/.claude/settings.json` `deny` list.
+
+### What to watch
+
+- The audit logger writes to `~/.claude/audit/` indefinitely. Delete or rotate it if disk space matters.
+- The session recall hook reads your full Claude history. If you hand this laptop to someone else, that history is still on disk.
+- If you add your own hooks, they run with your user permissions. Read the source before copying any hook from a stranger.
+
+If you see a component in this repo that phones somewhere not listed here, open an issue.
 
 ## FAQ
 

@@ -6,10 +6,18 @@ Hooks are shell commands that run automatically in response to Claude Code event
 
 ```
 hooks/
-├── README.md              ← You are here
-├── session-recall.py      ← Memory across sessions (the killer hook)
-└── install-hooks.sh       ← One-command installer
+├── README.md                       ← You are here
+├── SAFETY.md                       ← What each hook reads, writes, and sends over the network
+├── session-recall.py               ← Memory across sessions (the killer hook)
+├── block-dangerous-commands.sh     ← Pre-tool: stop destructive commands
+├── protect-files.sh                ← Pre-tool: warn on .env and credential edits
+├── pii-scan-precommit.sh           ← Pre-tool: scan git commits for secrets and PII
+├── audit-logger.sh                 ← Post-tool: append every tool call to a daily JSONL
+├── lib/common.sh                   ← Shared helpers: emit_block, emit_warn, log_audit_safe
+└── install-hooks.sh                ← One-command installer
 ```
+
+> **Before you install, read [`SAFETY.md`](SAFETY.md).** It lists what each hook reads, writes, and whether it makes a network call. Hooks execute with your user permissions, so the trust model matters.
 
 ## Quick Install
 
@@ -19,7 +27,7 @@ chmod +x hooks/install-hooks.sh
 ./hooks/install-hooks.sh
 ```
 
-This copies `session-recall.py` to `~/.claude/hooks/` and sets up your `~/.claude/settings.json` with all three hooks configured.
+This copies the hook scripts to `~/.claude/hooks/` and sets up your `~/.claude/settings.json` with all three hooks configured.
 
 ## The Three Hooks
 

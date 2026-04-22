@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Read the guides first
+    url: https://github.com/Tokenized2027/Claude-Initialization-V7#guides
+    about: Most questions are answered in the guides folder. Skim there before opening an issue.
+  - name: Claude Code official docs
+    url: https://docs.claude.com/en/docs/claude-code
+    about: If the question is about Claude Code itself (not this kit), the official docs are the right place.
